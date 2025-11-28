@@ -6,7 +6,7 @@ function SearchScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Search for an item</Text>
+      <Text style={styles.title}>Search for an Item</Text>
 
       <TextInput
         style={styles.input}
@@ -31,19 +31,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#f9fafb",
   },
   title: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: "700",
-    marginBottom: 16,
+    marginBottom: 20,
   },
   input: {
     backgroundColor: "white",
     borderWidth: 1,
     borderColor: "#e5e7eb",
     borderRadius: 8,
-    padding: 10,
+    padding: 12,
     marginBottom: 16,
+    fontSize: 16,
   },
   resultText: {
     fontSize: 16,
+    color: "#333",
   },
 });
