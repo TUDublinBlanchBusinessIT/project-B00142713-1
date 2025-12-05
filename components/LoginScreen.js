@@ -10,12 +10,16 @@ import {
 function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const [error, setError] = useState(""); 
+  const [error, setError] = useState("");
 
   function validateEmail(email) {
-    const regex = /\S+@\S+\.\S+/; 
+    const regex = /\S+@\S+\.\S+/;
     return regex.test(email);
+  }
+
+  function validatePassword(password) {
+    const regex = /^(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+    return regex.test(password);
   }
 
   function handleLogin() {
@@ -36,8 +40,10 @@ function LoginScreen({ navigation }) {
       return;
     }
 
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
+    if (!validatePassword(password)) {
+      setError(
+        "Password must be at least 8 characters, include a number and a special character."
+      );
       return;
     }
 
@@ -99,8 +105,8 @@ const styles = StyleSheet.create({
   errorText: {
     color: "red",
     marginBottom: 10,
-    textAlign: "center",
     fontSize: 14,
+    textAlign: "center",
   },
   button: {
     backgroundColor: "#2563eb",
