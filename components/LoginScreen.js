@@ -6,10 +6,12 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
   function validateEmail(email) {
@@ -62,13 +64,26 @@ function LoginScreen({ navigation }) {
         autoCapitalize="none"
       />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+      <View style={styles.passwordContainer}>
+        <TextInput
+          style={styles.passwordInput}
+          placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry={!showPassword}
+        />
+
+        <TouchableOpacity
+          onPress={() => setShowPassword(!showPassword)}
+          style={styles.eyeIcon}
+        >
+          <Ionicons
+            name={showPassword ? "eye-off-outline" : "eye-outline"}
+            size={22}
+            color="#555"
+          />
+        </TouchableOpacity>
+      </View>
 
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
@@ -102,6 +117,25 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 12,
   },
+
+  passwordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "white",
+    borderWidth: 1,
+    borderColor: "#e5e7eb",
+    borderRadius: 8,
+    paddingRight: 10,
+    marginBottom: 12,
+  },
+  passwordInput: {
+    flex: 1,
+    padding: 10,
+  },
+  eyeIcon: {
+    paddingHorizontal: 4,
+  },
+
   errorText: {
     color: "red",
     marginBottom: 10,
